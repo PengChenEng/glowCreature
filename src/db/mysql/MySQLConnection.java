@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -189,6 +190,51 @@ public class MySQLConnection implements DBConnection {
 			saveItem(item);
 		}
 
+		return items;
+	}
+
+	@Override
+	public List<Item> searchCreatures(double lat, double lon) {
+		if (conn == null) {
+			return null;
+		}
+		List<Item> items = new ArrayList<>();
+		try {
+			String sql = "SELECT" +
+					"  creature_id, (" +
+					"    3959 * acos (" +
+					"      cos ( radians(?) )" +
+					"      * cos( radians( lat ) )" +
+					"      * cos( radians( lon ) - radians(?) )" +
+					"      + sin ( radians(?) )" +
+					"      * sin( radians( lat ) )" +
+					"    )" +
+					"  ) AS distance," +
+					"  lat, lon, glow, fig_url " +
+					"FROM creatures " +
+					"HAVING distance < 3000 " +
+					"ORDER BY distance " +
+					"LIMIT 0 , 10;";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDouble(1, lat);
+			ps.setDouble(2, lon);
+			ps.setDouble(3, lat);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				double creature_lat = rs.getDouble("lat");
+				double creature_lon = rs.getDouble("lon");
+				Item item = new ItemBuilder()
+						.setLat(creature_lat)
+						.setLng(creature_lon)
+						.setAddress(creature_lat + ", " + creature_lon)
+						.setName(rs.getString("glow"))
+						.setImageUrl(rs.getString("fig_url"))
+						.build();
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return items;
 	}
 

@@ -18,7 +18,8 @@
     document.querySelector('#register-form-btn').addEventListener('click', showRegisterForm);
     document.querySelector('#register-btn').addEventListener('click', register);
     document.querySelector('#description-btn').addEventListener('click', description);
-    document.querySelector('#nearby-btn').addEventListener('click', loadNearbyItems);
+    document.querySelector('#nearby-btn').addEventListener('click', loadNearbyAquariums);
+    document.querySelector('#nearby-creatures-btn').addEventListener('click', loadNearbyCreatures);
     document.querySelector('#fav-btn').addEventListener('click', loadFavoriteItems);
     document.querySelector('#recommend-btn').addEventListener('click', loadRecommendedItems);
     validateSession();
@@ -184,7 +185,7 @@
       } else {
         console.warn('Getting location by IP failed.');
       }
-      loadNearbyItems();
+      loadNearbyAquariums();
     });
   }
 
@@ -394,22 +395,28 @@
   // -------------------------------------
   // AJAX call server-side APIs
   // -------------------------------------
+  function loadNearbyAquariums() {
+	  loadNearbyItems('nearby-btn', './search')
+  }
+
+  function loadNearbyCreatures() {
+	  loadNearbyItems('nearby-creatures-btn', './search-creatures')
+  }
 
   /**
    * API #1 Load the nearby items API end point: [GET]
    * /search?user_id=1111&lat=37.38&lon=-122.08
    */
-  function loadNearbyItems() {
+  function loadNearbyItems(btnId, url) {
 	deleteMarkers();
     console.log('loadNearbyItems');
-    activeBtn('nearby-btn');
+    activeBtn(btnId);
     var itemList = document.querySelector('#item-list');
     var description = document.querySelector('#description-text');
     showElement(itemList);
     hideElement(description);
 
     // The request parameters
-    var url = './search';
     var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng;
     var data = null;
 

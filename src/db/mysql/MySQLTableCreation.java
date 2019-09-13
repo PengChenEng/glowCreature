@@ -78,7 +78,9 @@ public class MySQLTableCreation {
 			
 			sql = "CREATE TABLE creatures ("
 					+ "creature_id VARCHAR(255) NOT NULL,"
-					+ "location VARCHAR(255) NOT NULL,"
+					+ "lat DECIMAL(9,6) NOT NULL,"
+					+ "lon DECIMAL(9,6) NOT NULL,"
+					+ "geohash VARCHAR(255) NOT NULL,"
 					+ "glow VARCHAR(255) NOT NULL," 
 					+ "fig_url VARCHAR(255) NOT NULL,"
 					+ "PRIMARY KEY (creature_id)"

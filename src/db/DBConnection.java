@@ -64,6 +64,16 @@ public interface DBConnection {
 	public List<Item> searchItems(double lat, double lon, String term);
 
 	/**
+	 * Search glow creatures near a geolocation.
+	 *
+	 * @param userId
+	 * @param lat
+	 * @param lon
+	 * @return list of items
+	 */
+	public List<Item> searchCreatures(double lat, double lon);
+
+	/**
 	 * Save item into db.
 	 * 
 	 * @param item
