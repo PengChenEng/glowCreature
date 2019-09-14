@@ -13,6 +13,9 @@
    */
   function init() {
     // register event listeners
+	var description = document.querySelector('#description-text');
+	hideElement(description);
+	
     document.querySelector('#login-form-btn').addEventListener('click', onSessionInvalid);
     document.querySelector('#login-btn').addEventListener('click', login);
     document.querySelector('#register-form-btn').addEventListener('click', showRegisterForm);
@@ -67,7 +70,7 @@
     welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
 
     showElement(itemNav);
-    showElement(description)
+    
     showElement(avatar);
     showElement(welcomeMsg);
     showElement(logoutBtn, 'inline-block');
@@ -75,6 +78,7 @@
     setPosition(map,'sticky');
     
     hideElement(itemList);
+    hideElement(description);
     hideElement(loginForm);
     hideElement(registerForm);
     initGeoLocation();
@@ -297,7 +301,12 @@
   // -----------------------------------
 
   function description() {
-	  var tide = document.createTextNode("Hello");
+	  activeBtn('description-btn');
+	  var text = document.querySelector('#description-text');
+//	  text.innerHTML = '<p>' + 'hello' + '</p>';
+//	  var tide = document.createTextNode("Hello");
+//	  text.appendChild(tide);
+	  showElement(text);
   }
   
   // -----------------------------------
