@@ -105,7 +105,8 @@ ul{
 }
 
 .main-section {
-  background-color:#01f5f9;
+/* marine blue color */	
+  background-color:#00A1DE; 
   display: flex;
 }
 /** 
@@ -162,6 +163,12 @@ ul{
 #item-nav {
   float:left;
   width:180px;
+  height:600px;
+}
+
+#description {
+  float:left;
+  width:300px;
   height:600px;
 }
 

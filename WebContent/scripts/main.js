@@ -20,7 +20,7 @@
     document.querySelector('#login-btn').addEventListener('click', login);
     document.querySelector('#register-form-btn').addEventListener('click', showRegisterForm);
     document.querySelector('#register-btn').addEventListener('click', register);
-    document.querySelector('#description-btn').addEventListener('click', description);
+    document.querySelector('#description-btn').addEventListener('click', setDescription);
     document.querySelector('#nearby-btn').addEventListener('click', loadNearbyAquariums);
     document.querySelector('#nearby-creatures-btn').addEventListener('click', loadNearbyCreatures);
     document.querySelector('#fav-btn').addEventListener('click', loadFavoriteItems);
@@ -66,7 +66,7 @@
     var welcomeMsg = document.querySelector('#welcome-msg');
     var logoutBtn = document.querySelector('#logout-link');
     var map = document.querySelector('#map');
-
+    
     welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
 
     showElement(itemNav);
@@ -75,12 +75,15 @@
     showElement(welcomeMsg);
     showElement(logoutBtn, 'inline-block');
     showElement(map);
+    showElement(description);
     setPosition(map,'sticky');
     
     hideElement(itemList);
-    hideElement(description);
+    
     hideElement(loginForm);
     hideElement(registerForm);
+
+    setDescription();
     initGeoLocation();
   }
 
@@ -159,6 +162,7 @@
   function onPositionUpdated(position) {
     lat = position.coords.latitude;
     lng = position.coords.longitude;
+    console.info('updated geo position lat: ' + lat + ' lng ' + lng);
 
     args.map.setCenter({
     	lat:lat,
@@ -300,13 +304,23 @@
   // Description functions
   // -----------------------------------
 
-  function description() {
+  function setDescription() {
 	  activeBtn('description-btn');
+	  document.querySelector("#description-text").style.width = "500px";
 	  var text = document.querySelector('#description-text');
-//	  text.innerHTML = '<p>' + 'hello' + '</p>';
-//	  var tide = document.createTextNode("Hello");
-//	  text.appendChild(tide);
+	  var tide = document.createTextNode("Over the past decade, scientists have discovered " +
+	  		"the seemingly dark deep sea is actually ablaze with color. From corals to sea turtles to eels, " +
+	  		"countless marine species are biofluorescent or bioluminescent" +
+	  		", taking the offensive and lure in the catch of the day using their lights." +
+	  		"Let's figure out the glow superstar near us! This website provides search features both for " +
+	  		"glow creatures and nearby aquariums based on location");
+	  
+	  text.appendChild(tide);
+	  
+	  var itemList = document.querySelector('#item-list');
+	  
 	  showElement(text);
+	  hideElement(itemList);
   }
   
   // -----------------------------------

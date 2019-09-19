@@ -88,10 +88,40 @@ public class MySQLTableCreation {
 			statement.executeUpdate(sql);
 			
 			// step 4: test insert
-//			sql = "INSERT INTO users VALUES (" 
-//					+ "'1111', 'aaaa', 'John', 'Smith', 'salt')";
-//			
-//			statement.executeUpdate(sql);
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Red tide', '32.716', '-117.161', 'San Diego', 'bioluminescence', "
+					+ "'https://www.mercurynews.com/wp-content/uploads/2018/05/bluewave.jpg?w=865')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Clusterwink snail', '32.716', '-117.161', 'San Diego', 'bioluminescence', "
+					+ "'https://media.wired.com/photos/5b189b6699308e6c50e27698/master/w_660,c_limit/clusterwink.jpg')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Atolla', '36.600', '-121.895', 'Monterey Bay', 'bioluminescence', "
+					+ "'https://media.wired.com/photos/5b189b677169727a89c69b99/master/w_660,c_limit/atolla.jpg')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Abraliopsis-squid', '36.600', '-121.895', 'Monterey Bay', 'bioluminescence', "
+					+ "'https://media.wired.com/photos/5b189b68d09a372e164ceaea/master/w_660,c_limit/abraliopsis-squid.jpg')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Tomopteris', '36.600', '-121.895', 'Monterey Bay', 'bioluminescence', "
+					+ "'https://media.wired.com/photos/5b189b691f816f6e082cce28/master/w_660,c_limit/tomopteris.jpg')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Glowing corals', '20.280', '38.513', 'Red sea', 'biofluorescence', "
+					+ "'https://66.media.tumblr.com/tumblr_lpeuciiZYo1qb2upxo1_640.jpg')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO creatures VALUES (" 
+					+ "'Comb Jelly', '27.665', '-81.516', 'Florida', 'bioluminescence', "
+					+ "'https://s3.amazonaws.com/static.organiclead.com/Site-e11ba9c7-af71-4afc-8f6a-32bce62a9a52/shutterstock_190676801.jpg')";
+			statement.executeUpdate(sql);
 			
 			conn.close();
 			System.out.println("Import done successfully");
